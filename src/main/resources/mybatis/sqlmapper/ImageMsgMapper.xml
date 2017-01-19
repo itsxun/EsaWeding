@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xin.fallen.dao.ImageMsgMapper">
+    <resultMap id="BaseResultMap" type="xin.fallen.bean.ImageMsg">
+        <result column="ToUserName" property="ToUserName" jdbcType="VARCHAR"/>
+        <result column="FromUserName" property="FromUserName" jdbcType="VARCHAR"/>
+        <result column="MsgId" property="MsgId" jdbcType="VARCHAR"/>
+        <result column="CreateTime" property="CreateTime" jdbcType="VARCHAR"/>
+        <result column="MsgType" property="MsgType" jdbcType="VARCHAR"/>
+        <result column="PicUrl" property="PicUrl" jdbcType="VARCHAR"/>
+        <result column="MediaId" property="MediaId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="xin.fallen.bean.ImageMsg">
+        insert into
+          wechat_msg_image
+          (RecordTime,ToUserName,FromUserName,MsgId,MsgType,PicUrl,MediaId,PicPath)
+        values (
+         current_timestamp(6),#{ToUserName},#{FromUserName},#{MsgId},
+         #{MsgType},#{PicUrl},#{MediaId},#{PicPath})
+  </insert>
+    <select id="selectByPrimarykey" parameterType="String" resultMap="BaseResultMap">
+        select
+          ToUserName,FromUserName,MsgId,CreateTime,MsgType,PicUrl,MediaId
+        from
+          wechat_msg_image
+        where
+          msgid=#{msgId}
+    </select>
+</mapper>

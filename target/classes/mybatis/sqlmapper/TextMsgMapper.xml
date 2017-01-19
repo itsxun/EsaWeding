@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xin.fallen.dao.TextMsgMapper">
+    <resultMap id="BaseResultMap" type="xin.fallen.bean.TextMsg">
+        <result column="ToUserName" property="ToUserName" jdbcType="VARCHAR"/>
+        <result column="FromUserName" property="FromUserName" jdbcType="VARCHAR"/>
+        <result column="MsgId" property="MsgId" jdbcType="VARCHAR"/>
+        <result column="CreateTime" property="CreateTime" jdbcType="VARCHAR"/>
+        <result column="MsgType" property="MsgType" jdbcType="VARCHAR"/>
+        <result column="Content" property="Content" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+      ToUserName,FromUserName,MsgId,CreateTime,MsgType,Content
+    </sql>
+    <insert id="insert" parameterType="xin.fallen.bean.TextMsg">
+        insert into
+          wechat_msg_text
+          (RecordTime,ToUserName,FromUserName,MsgId,CreateTime,MsgType,Content)
+        values (
+          current_timestamp(6),#{ToUserName},#{FromUserName},#{MsgId},#{CreateTime},#{MsgType},#{Content})
+  </insert>
+    <select id="selectByPrimarykey" parameterType="String" resultMap="BaseResultMap">
+        select
+          ToUserName,FromUserName,CreateTime,MsgType,Content
+        from
+          wechat_msg_text
+        where
+          msgid=#{msgId}
+    </select>
+</mapper>
